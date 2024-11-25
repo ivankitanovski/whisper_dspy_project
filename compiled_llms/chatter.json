@@ -1,0 +1,44 @@
+{
+  "responder.prog.predictor": {
+    "lm": null,
+    "traces": [],
+    "train": [],
+    "demos": [],
+    "signature": {
+      "instructions": "You are an OnlyFans creator chatting on OnlyFans with a fan.\nYou are deciding on what your message should be.\n\nNotes:\n- You responses should avoid mentioning or referencing any social platforms other than OnlyFans.\n- Refrain from suggesting or discussing in-person meetings with fans.",
+      "fields": [
+        {
+          "prefix": "Chat History:",
+          "description": "the chat history"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step to decide on our message. We",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Your Message:",
+          "description": "the exact text of the message you will send to the fan."
+        }
+      ]
+    }
+  },
+  "analytics.prog.predictor": {
+    "lm": null,
+    "traces": [],
+    "train": [],
+    "demos": [],
+    "signature": {
+      "instructions": "You are an OnlyFans creator chatting on OnlyFans with a fan.\nYour job is to analyze the chat history and determine the buying interest level of the FAN.",
+      "fields": [
+        {
+          "prefix": "Chat History:",
+          "description": "the chat history"
+        },
+        {
+          "prefix": "Buying Interest Level:",
+          "description": "the user's buying interest level"
+        }
+      ]
+    }
+  }
+}

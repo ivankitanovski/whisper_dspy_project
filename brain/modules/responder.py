@@ -1,7 +1,8 @@
 import dspy
+from signatures.responder import ResponderSignature
 
-from signatures.responder import Responder
-from models import ChatHistory
+from brain.models import ChatHistory
+
 
 class ResponderModule(dspy.Module):
     def __init__(self):
@@ -9,12 +10,12 @@ class ResponderModule(dspy.Module):
         reasoning = dspy.OutputField(
             prefix="Reasoning: Let's think step by step to decide on our message. We",
         )
-        self.prog = dspy.TypedChainOfThought(Responder, reasoning=reasoning)
-    
+        self.prog = dspy.TypedChainOfThought(ResponderSignature, reasoning=reasoning)
+
     def forward(
         self,
         chat_history: dict,
     ):
         return self.prog(
-            chat_history=ChatHistory.parse_obj(chat_history),
+            chat_history=ChatHistory.model_validate(chat_history),
         )

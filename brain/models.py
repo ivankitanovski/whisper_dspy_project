@@ -1,15 +1,20 @@
 from datetime import datetime
-from pydantic import BaseModel
 from typing import List, Optional
+
+from pydantic import BaseModel
 
 
 class ChatMessage(BaseModel):
     from_creator: bool
     content: str
+    timestamp: Optional[datetime] = None # can extend to separate meta object if we need to capture more data here
 
     def __str__(self):
         role = "YOU" if self.from_creator else "THE FAN"
-        message = role + ": " + self.content
+        if self.timestamp:
+            message = f"{role} [{self.timestamp.strftime("%Y-%m-%d %H:%M:%S")}]: {self.content}"
+        else:
+            message = f"{role}: {self.content}"
         return message
 
 class ChatHistory(BaseModel):
@@ -26,6 +31,6 @@ class ChatHistory(BaseModel):
             #     )
             messages.append(message_str)
         return "\n".join(messages)
-    
+
     def model_dump_json(self, **kwargs):
         return str(self)

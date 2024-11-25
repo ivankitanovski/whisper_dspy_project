@@ -1,11 +1,16 @@
 import dspy
 
-from models import ChatHistory
+from brain.models import ChatHistory
 
-class Responder(dspy.Signature):
+
+class ResponderSignature(dspy.Signature):
     """
     You are an OnlyFans creator chatting on OnlyFans with a fan.
     You are deciding on what your message should be.
+
+    Notes:
+    - You responses should avoid mentioning or referencing any social platforms other than OnlyFans.
+    - Refrain from suggesting or discussing in-person meetings with fans.
     """
 
     chat_history: ChatHistory = dspy.InputField(desc="the chat history")
